@@ -17,9 +17,9 @@ def ENTRY():
     if name in list(Admin['Name']):
         print(" "*70)
         print("You're a admin!!")
-        global f
+        global passcode
         print(" "*70)
-        f=int(input("Enter your password:"))
+        passcode=int(input("Enter your password:"))
         ADMIN()
     elif name in list(User['Name']):
         print(" "*70)
@@ -28,8 +28,8 @@ def ENTRY():
     else:
         print(" "*70)
         print("Cannot Locate ur Name Anywhere !!")
-        print("To register yourself as anyone, press R!")
         print("To retry Login, press L!")
+        print("To register yourself as anyone, press R!")
         print("Else, leave empty to exit!!")
         print(" "*70)
         e=input("Enter Your choice:")
@@ -39,11 +39,10 @@ def ENTRY():
         elif e=="l" or e=="L":
             ENTRY()
         elif e=="":
-            sys.exit()
+            EXIT()
         else:
             print("INVALID INPUT!!")
             ENTRY()
-
 
 #AUTHENTIC USER, CAN EDIT ITEMS AND USER
         
@@ -51,16 +50,14 @@ def ADMIN():
     Admin=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv")
     desired_name_row=Admin[Admin['Name']==name]
     t=desired_name_row['Password'].values[0]
-    if f==t:
+    if passcode==t:
         print("Alright !! U r good to go ,Edit as many thing u want !!")
         ADMIN_STUFF()
     else:
         print("The Password is Invalid !!")
         print("Kindly Retry with a Correct One...")
         ENTRY()
-        
     
-
 #ADMIN RIGHTS AND AVAILABLE OPTIONS
 
 def ADMIN_STUFF():
@@ -73,6 +70,8 @@ def ADMIN_STUFF():
     print("[Enter 03] To Modify The Admins Details !!")
     print("[Enter 04] View the Admin's Count ")
     print("[Enter 05] View the User's Count ")
+    print("[Enter 06] View the LINE GRAPH ")
+    print("[Enter 07] View the BAR GRAPH ")
     print("[Press Enter] To Exit")
     print(" "*70)
     print("*"*70)
@@ -145,11 +144,8 @@ def ADMIN_STUFF():
     elif i==7:
         ADMIN_BAR()
         
-    elif i==8:
-        ADMIN_HISTO()
-        
     elif i=='':
-        sys.exit()
+        EXIT()
 
     else:
         print("Sorry, Your responce is not acceptable")
@@ -180,8 +176,7 @@ def USER():
         print("RETRY")
         USER()
         
-
-#USER KE Choices:
+#USER's Choices:
         
 def USER_STUFF():
     print(" "*70)
@@ -192,8 +187,6 @@ def USER_STUFF():
     print("[Enter 'M'] To Explore Our Models and Features .")
     print("[Enter 'L'] To Display the Line Chart")
     print("[Enter 'B'] To Display the Bar Chart")
-    print("[Enter 'H'] To Display the Histogram")
-    print("[Enter 'S'] Want to buy some of these Uniques !!!")
     print("[Enter 'A'] To Know More About Us .")
     print("[Hit Enter] To Exit")
     print("*"*70)
@@ -202,25 +195,21 @@ def USER_STUFF():
     h=input("Kindly Enter Your choice -->")
     
     if h=='m' or h=='M':
-        MENU()
+        CSV()
+        USER_STUFF()
     elif h=='l' or h=='L':
         USER_LINE()
     elif h=='b' or h=='B':
         USER_BAR()
-    elif h=='h' or h=='H':
-        USER_HISTO()
-    elif h=='s' or h=='S':       
-        SHOP()
     elif h=='a' or h=='A':
         ABOUT()
     elif h=='':
         print("*"*70)
         print("Successfully Exit")
         print("*"*70)
-        sys.exit()
+        EXIT()
     else:
         print("Sorry, Your responce is not acceptable")
-
 
 #NEW USER ADDITION
         
@@ -267,7 +256,6 @@ def Read():
 
     return SUV,XUV,Coupe,Roadster,Super_Car
 
-
 #MAIN CSV
 
 def CSV():
@@ -302,25 +290,7 @@ def CSV():
     print(tabulate(df5,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" "*70)
     
-    
-#MENU FOR REVIEW OF ITEMS
-def MENU():
-    print("Welcome to our MENU")
-    print("This is content we have right in here!!")
-    
-    CSV()
 
-    print(" ")    
-    print("Would u like to Shop any of these ? Press Y ")
-    print("Or return to the User Menu by pressing N ")
-    o=input("Kindly Enter Your Choice :")
-    print(" ")
-    
-    if o=="y" or o=="Y":
-        SHOP()
-    elif o=="n" or o=="N":
-        USER_STUFF()
-    
 #ABOUT THE PROGRAM
 
 def ABOUT():
@@ -333,9 +303,20 @@ def ABOUT():
     print(" ")
 
     if a=="X" or a=="x":
-        sys.exit()
+        EXIT()
     else:
         USER_STUFF()
+
+#EXITING THE PROGRAM
+def EXIT():
+    print(" ")
+    print("Ready to Exit AMG TROS. Motor Garage !!! ")
+    print("Hope u enjoyed this wonderful tour of A Car Bazzar .... ")
+    print("For more of Such InSane Project... tune to another similar presentations...")
+    print("entitled - 'InSane Laptop and Accessories Sales' by Govind Kumar")
+    print("entitled - 'Life Line Hospital Management System' by Pawan Kumar Kashyap")
+    print("Thank you !!!")
+    print(" ")
 
 #ADDING A NEW VEHICLE
 
@@ -348,10 +329,7 @@ def NEW():
     print("Out of SUV (1), XUV (2), Coupe (3), Roadster (4), Super Cars (5)")
     
     c=int(input("Enter Your Choice : "))
-    print(c)
-
-    SUV,XUV,Coupe,Roadster,Super_Car = Read()
-    
+    SUV,XUV,Coupe,Roadster,Super_Car = Read()    
     l=[SUV,XUV,Coupe,Roadster,Super_Car]
     a=len(l)
     
@@ -372,7 +350,7 @@ def NEW():
         cpr=float(input("Enter Price (in $):"))
         print(" ")
 
-        t={"ID":cid+1,"Vehicle Model Name":cname,"Engine Disp.":ced,"Top Speed":cts,"Acceleration":ca,"Power":cp,"Torque":ct,"Price (in $)":cpr}
+        t={"ID":cid+1,"Model Name":cname,"Engine Disp.":ced,"Top Speed":cts,"Acceleration":ca,"Power":cp,"Torque":ct,"Price (in $)":cpr}
         dt=pd.DataFrame([t])
         df=pd.concat([df,dt],ignore_index=True)
         
@@ -382,8 +360,6 @@ def NEW():
 
         print(" ")
         print(tabulate(df,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
-        print(" ")
-        
         print(" ")
         
         df.to_csv(l[c-1],index=False)
@@ -565,7 +541,10 @@ def ADMIN_DELETE():
     print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
 
-    Admin=Admin.to_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv",index=False)   
+    Admin=Admin.to_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv",index=False)
+
+
+# Discretion b/w VISUALISATION for Admin and User.
 
 def USER_LINE():
     LINE()
@@ -575,10 +554,6 @@ def USER_BAR():
     BAR()
     USER_STUFF()
     
-def USER_HISTO():
-    LINE()
-    USER_STUFF()
-    
 def ADMIN_LINE():
     LINE()
     ADMIN_STUFF()
@@ -586,11 +561,6 @@ def ADMIN_LINE():
 def ADMIN_BAR():
     BAR()
     ADMIN_STUFF()
-    
-def ADMIN_HISTO():
-    HISTO()
-    ADMIN_STUFF()
-
 
 #LINE CHART
         
@@ -617,41 +587,18 @@ def LINE():
         print(" ")
 
         print("Which would you prefer to see the graph for? ")
-        print("[Enter 'P'] for Price Graph")
-        print("[Enter 'D'] for Description Graph ")
-        c=input("Kindly Enter Your Choice :")
-        
-        m=df["Vehicle Model Name"]
-        e=df["Engine Disp."]
-        ts=df["Top Speed"]
-        a=df["Acceleration"]
-        p=df["Power"]
-        t=df["Torque"]
-        pr=df["Price (in $)"]
-
-        if c=="p" or c=="P":
-
-            plt.plot(m,pr,linestyle="dashdot",marker='d',color='k',label="Price (in $)")
+        i=int(input("Kindly Enter Your Choice(NO.) :"))
+        columns=df.columns.tolist()
+        names=df['Model Name'].tolist()
+        a=len(columns)
+        if i<=a:
+            e=df[columns[i-1]]
+            plt.plot(names,e,linestyle="dashdot",marker='d',color='k',label=columns[i-1])
             plt.xlabel("Vehicle Name")
-            plt.ylabel("Price")
+            plt.ylabel(columns[i-1])
             plt.title("Vehicle Statistics")
             plt.legend()
             plt.show()
-
-        elif c=="d" or c=="D":
-            
-            plt.plot(m,e,linestyle="dashdot",marker='d',color='maroon',label="Engine Disp.")
-            plt.plot(m,ts,linestyle="dashed",marker='o',color='darkorchid',label="Top Speed")
-            plt.plot(m,a,linestyle="dotted",marker='*',color='lightpink',label="Acceleration")
-            plt.plot(m,p,linestyle="dashdot",marker='+',color='mediumvioletred',label="Power")
-            plt.plot(m,t,linestyle="dashed",marker='d',color='magenta',label="Torque")
-            
-            plt.xlabel("Vehicle Name")
-            plt.ylabel("Make and Model")
-            plt.title("Vehicle Statistics")
-            plt.legend()
-            plt.show()
-
         else:
             print("Sorry, Your responce is not acceptable")
             LINE()
@@ -682,118 +629,19 @@ def BAR():
         print(" ")
 
         print("Which would you prefer to see the graph for? ")
-        print("[Enter 'P'] for Price Graph")
-        print("[Enter 'D'] for Description Graph ")
-        c=input("Kindly Enter Your Choice :")
-        
-        m=df["Vehicle Model Name"]
-        e=df["Engine Disp."]
-        ts=df["Top Speed"]
-        a=df["Acceleration"]
-        p=df["Power"]
-        t=df["Torque"]
-        pr=df["Price (in $)"]
+        i=int(input("Kindly Enter Your Choice(NO.) :"))
+        columns=df.columns.tolist()
+        names=df['Model Name'].tolist()
+        a=len(columns)
+        if i<=a:
+            e=df[columns[i-1]]
 
-        x=np.arange(len(m))
-
-        if c=="p" or c=="P":
-
-            plt.bar(m,pr,width=1,ec='w',color='k',label="Price (in $)")
+            plt.bar(names,e,width=1,ec='w',color='k',label=columns[i-1])
             plt.xlabel("Vehicle Name")
-            plt.ylabel("Price")
+            plt.ylabel(columns[i-1])
             plt.title("Vehicle Statistics")
             plt.legend()
             plt.show()
-
-        elif c=="d" or c=="D":
-            
-            plt.bar(m,e,width=0.2,ec='w',color='maroon',label="Engine Disp.")
-            plt.bar(x+0.2,ts,width=0.2,ec='w',color='darkorchid',label="Top Speed")
-            plt.bar(x+0.4,a,width=0.2,ec='w',color='lightpink',label="Acceleration")
-            plt.bar(x+0.6,p,width=0.2,ec='w',color='mediumvioletred',label="Power")
-            plt.bar(x+0.8,t,width=0.2,ec='w',color='magenta',label="Torque")
-            
-            plt.xlabel("Vehicle Name")
-            plt.ylabel("Make and Model")
-            plt.title("Vehicle Statistics")
-            plt.legend()
-            plt.show()
-
-        else:
-            print("Sorry, Your responce is not acceptable")
-            BAR()
-
-#HISTOGRAM
-
-def HISTO():
-
-    print(" ")
-    print("Graphing a Histogram from the Car List .... ")
-    print(" ")
-    print("Which would you prefer to see the graph for?")
-    print("Out of SUV (1), XUV (2), Coupe (3), Roadster (4), Super Cars (5)")
-    c=int(input("Enter Your Choice : "))
-    print(" ")
-
-    SUV,XUV,Coupe,Roadster,Super_Car = Read()
-
-    l=[SUV,XUV,Coupe,Roadster,Super_Car]
-    a=len(l)
-
-    if c-1<=a:
-        df=pd.read_csv(l[c-1])
-
-        print(" ")
-        print(tabulate(df,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
-        print(" ")
-
-        print("Which would you prefer to see the graph for? ")
-        print("[Enter 'P'] for Price Graph")
-        print("[Enter 'D'] for Description Graph ")
-        c=input("Kindly Enter Your Choice :")
-        
-        m=df["Vehicle Model Name"]
-        e=df["Engine Disp."]
-        ts=df["Top Speed"]
-        a=df["Acceleration"]
-        p=df["Power"]
-        t=df["Torque"]
-        pr=df["Price (in $)"]
-        
-        if c=="p" or c=="P":
-
-            plt.hist(pr,width=1,ec='w',color='k')
-            plt.xlabel("Price")
-            plt.title("Vehicle Statistics")
-            plt.show()
-
-        elif c=="d" or c=="D":
-            
-            plt.hist(e,width=10,ec='w',color='maroon',label="Engine Disp.")
-            plt.title("Engiine Displacement")
-            plt.show()
-            plt.hist(ts,width=50,ec='w',color='darkorchid',label="Top Speed")
-            plt.title("Top Speed")
-            plt.show()
-            plt.hist(a,width=50,ec='w',color='lightpink',label="Acceleration")
-            plt.title("Acceleration")
-            plt.show()
-            plt.hist(p,width=50,ec='w',color='mediumvioletred',label="Power")
-            plt.title("Power")
-            plt.show()
-            plt.hist(t,width=50,ec='w',color='magenta',label="Torque")
-            plt.title("Toque")
-            plt.show()
-
-        else:
-            print("Sorry, Your responce is not acceptable")
-            HISTO()
-
-#BUYING ITEMS
-
-def SHOP():
-    print("Welcome to the SHOP")
-    shop=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Shop.csv")
 
 
 ENTRY()
