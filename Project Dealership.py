@@ -4,8 +4,8 @@ from tabulate import tabulate
 # OLD USER SEARCH AND DEPLOY
 
 def ENTRY():
-    Admin=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv")
-    User=pd.read_csv("E:\\Yash\\Pro Project\\Main\\User.csv")
+    Admin=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv")
+    User=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\User.csv")
     global name
     print(" "*70)
     print("*"*70)
@@ -47,7 +47,7 @@ def ENTRY():
 #AUTHENTIC USER, CAN EDIT ITEMS AND USER
         
 def ADMIN():
-    Admin=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv")
+    Admin=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv")
     desired_name_row=Admin[Admin['Name']==name]
     t=desired_name_row['Password'].values[0]
     if passcode==t:
@@ -72,7 +72,7 @@ def ADMIN_STUFF():
     print("[Enter 05] View the User's Count ")
     print("[Enter 06] View the LINE GRAPH ")
     print("[Enter 07] View the BAR GRAPH ")
-    print("[Press Enter] To Exit")
+    print("[Press 00] To Exit")
     print(" "*70)
     print("*"*70)
     print(" "*70)
@@ -129,12 +129,12 @@ def ADMIN_STUFF():
             ADMIN_STUFF()
         
     elif i==4:
-        Admin=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv")
+        Admin=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv")
         print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
         ADMIN_STUFF()
 
     elif i==5:
-        User=pd.read_csv("E:\\Yash\\Pro Project\\Main\\User.csv")
+        User=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\User.csv")
         print(tabulate(User,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
         ADMIN_STUFF()
 
@@ -144,9 +144,11 @@ def ADMIN_STUFF():
     elif i==7:
         ADMIN_BAR()
         
-    elif i=='':
+    elif i==0:
+        print("*"*70)
+        print("Exiting program...")
+        print("*"*70)
         EXIT()
-
     else:
         print("Sorry, Your responce is not acceptable")
         ADMIN_STUFF()
@@ -156,7 +158,7 @@ def ADMIN_STUFF():
 def USER():
 
     print(" ")
-    User=pd.read_csv("E:\\Yash\\Pro Project\\Main\\User.csv")
+    User=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\User.csv")
     print(" ")
     
     print("Login as User")
@@ -205,7 +207,7 @@ def USER_STUFF():
         ABOUT()
     elif h=='':
         print("*"*70)
-        print("Successfully Exit")
+        print("Exiting program...")
         print("*"*70)
         EXIT()
     else:
@@ -214,7 +216,7 @@ def USER_STUFF():
 #NEW USER ADDITION
         
 def REGISTRATION():
-    User=pd.read_csv("E:\\Yash\\Pro Project\\Main\\User.csv")
+    User=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\User.csv")
     print("Register Yourself as User")
     print(" ")
 
@@ -240,19 +242,18 @@ def REGISTRATION():
     print(tabulate(User,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
     
-    User.to_csv("E:\\Yash\\Pro Project\\Main\\User.csv", index=False)
+    User.to_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\User.csv", index=False)
 
-    USER_STUFF()
 
 #MAIN READING
     
 def Read():
     
-    SUV="E:\\Yash\\Pro Project\\Models\\SUV.csv"
-    XUV="E:\\Yash\\Pro Project\\Models\\XUV.csv"
-    Coupe="E:\\Yash\\Pro Project\\Models\\Coupe.csv"
-    Roadster="E:\\Yash\\Pro Project\\Models\\Roadster.csv"
-    Super_Car="E:\\Yash\\Pro Project\\Models\\Super Car.csv"
+    SUV="C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Models\\SUV.csv"
+    XUV="C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Models\\XUV.csv"
+    Coupe="C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Models\\Coupe.csv"
+    Roadster="C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Models\\Roadster.csv"
+    Super_Car="C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Models\\Super Car.csv"
 
     return SUV,XUV,Coupe,Roadster,Super_Car
 
@@ -310,7 +311,7 @@ def ABOUT():
 #EXITING THE PROGRAM
 def EXIT():
     print(" ")
-    print("Ready to Exit AMG TROS. Motor Garage !!! ")
+    print("Exiting AMG TROS. Motor Garage !!! ")
     print("Hope u enjoyed this wonderful tour of A Car Bazzar .... ")
     print("For more of Such InSane Project... tune to another similar presentations...")
     print("entitled - 'InSane Laptop and Accessories Sales' by Govind Kumar")
@@ -472,7 +473,7 @@ def ADMIN_NEW():
     print(" ")
     print("Adding A New Admin ....")
     print(" ")
-    Admin=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv")
+    Admin=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv")
     print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
 
@@ -494,14 +495,14 @@ def ADMIN_NEW():
     print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
 
-    Admin=Admin.to_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv",index=False)
+    Admin=Admin.to_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv",index=False)
 
 def ADMIN_UPDATE():
 
     print(" ")
     print("Updating the record of a Existing Admin ....")
     print(" ")
-    Admin=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv")
+    Admin=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv")
     print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
 
@@ -519,14 +520,14 @@ def ADMIN_UPDATE():
     print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
 
-    Admin=Admin.to_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv",index=False)
+    Admin=Admin.to_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv",index=False)
 
 def ADMIN_DELETE():
 
     print(" ")
     print("Deleting the record of a Existing Admin ....")
     print(" ")
-    Admin=pd.read_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv")
+    Admin=pd.read_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv")
     print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
 
@@ -541,7 +542,7 @@ def ADMIN_DELETE():
     print(tabulate(Admin,showindex=False,headers='keys',tablefmt='orgbtl',numalign='center'))
     print(" ")
 
-    Admin=Admin.to_csv("E:\\Yash\\Pro Project\\Main\\Admin.csv",index=False)
+    Admin=Admin.to_csv("C:\\Users\\C_Zero\\Desktop\\Insane\\AMG TROS\\Main\\Admin.csv",index=False)
 
 
 # Discretion b/w VISUALISATION for Admin and User.
@@ -642,6 +643,5 @@ def BAR():
             plt.title("Vehicle Statistics")
             plt.legend()
             plt.show()
-
-
+    ENTRY()
 ENTRY()
